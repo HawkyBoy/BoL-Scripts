@@ -80,7 +80,7 @@ function OnLoad()
 	
 	aiConfig = scriptConfig("AutoSmite", "Auto Smite")
 	aiConfig:addSubMenu("[Auto Smite Settings]", "smites")
-	aiConfig:addParam("asmite", "Auto Smite", SCRIPT_PARAM_ONKEYTOGGLE, true, string.byte("J"))
+	aiConfig:addParam("asmite", "[Auto Smite]", SCRIPT_PARAM_ONKEYTOGGLE, true, string.byte("J"))
 	aiConfig.smites:addParam("smiteAncient", "Smite Ancient Golem", SCRIPT_PARAM_ONOFF, true)
 	aiConfig.smites:addParam("smiteLizard", "Smite Lizard Elder", SCRIPT_PARAM_ONOFF, true)
 	aiConfig.smites:addParam("smiteWight", "Smite Wight", SCRIPT_PARAM_ONOFF, false)
