@@ -1,6 +1,6 @@
 if myHero.charName ~= "LeeSin" then return end
 
-local version = "1.2"
+local version = "1.3"
 local AUTOUPDATE = true
 
 
@@ -17,7 +17,7 @@ end
 if DOWNLOADING_SOURCELIB then print("Downloading required libraries, please wait...") return end
 
 if AUTOUPDATE then
-SourceUpdater(SCRIPT_NAME, version, "raw.githubusercontent.com", "/HawkyBoy/BoL-Scripts/blob/master/"..SCRIPT_NAME..".lua", SCRIPT_PATH .. GetCurrentEnv().FILE_NAME, "/HawkyBoy/BoL-Scripts/blob/master/"..SCRIPT_NAME..".version"):CheckUpdate()
+SourceUpdater(SCRIPT_NAME, version, "raw.github.com", "/HawkyBoy/BoL-Scripts/master/"..SCRIPT_NAME..".lua", SCRIPT_PATH .. GetCurrentEnv().FILE_NAME, "/HawkyBoy/BoL-Scripts/master/"..SCRIPT_NAME..".version"):CheckUpdate()
 end
 
 local RequireI = Require("SourceLib")
