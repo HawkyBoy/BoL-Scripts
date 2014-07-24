@@ -1,6 +1,6 @@
 if myHero.charName ~= "LeeSin" then return end
 
-local version = "1.5"
+local version = "1.6"
 local AUTOUPDATE = true
 
 
@@ -47,7 +47,18 @@ local qDmgs = {50, 80, 110, 140, 170}
 local useSight, lastWard, targetObj, friendlyObj = nil, nil, nil, nil
 local VP, ts = nil, nil
 
+local range = 750 -- smite's range
+local smiteDmgs = {390, 410, 430, 450, 480, 510, 540, 570, 600, 640, 680, 720, 760, 800, 850, 900, 950, 1000} -- smite's dmgs
+ 
+local smite = nil
+local jungleMinions = {}
+
 function OnLoad()
+
+	if myHero:GetSpellData(SUMMONER_1).name:find("Smite") then smite = SUMMONER_1
+    elseif myHero:GetSpellData(SUMMONER_2).name:find("Smite") then smite = SUMMONER_2
+        end
+				
 	Config = scriptConfig("Master of Insec", "LeeSinCombo")
 	
 	Config:addParam("scriptActive", "[Combo]", SCRIPT_PARAM_ONKEYDOWN, false, 32)
@@ -63,6 +74,15 @@ function OnLoad()
 	Config.miscs:addParam("predInSec", "Use prediction for InSec", SCRIPT_PARAM_ONOFF, false)
 	Config.miscs:addParam("following", "Follow while combo", SCRIPT_PARAM_ONOFF, true)
 	Config:addSubMenu("[Ultimate Settings]", "useUlt")
+	Config:addSubMenu("[Auto Smite Settings]", "Auto Smite Settings")
+	Config.draws:addParam("drawInsec", "Draw InSec Line", SCRIPT_PARAM_ONOFF, true)
+	Config.draws:addParam("drawQ", "Draw Q Range", SCRIPT_PARAM_ONOFF, false)
+	Config.draws:addParam("asmite", "Auto Smite Enabled", SCRIPT_PARAM_ONOFF, true)
+	Config.draws:addParam("smiteAncient", "Smite Ancient Golem", SCRIPT_PARAM_ONOFF, true)
+	Config.draws:addParam("smiteLizard", "Smite Lizard Elder", SCRIPT_PARAM_ONOFF, true)
+	Config.draws:addParam("smiteWight", "Smite Wight", SCRIPT_PARAM_ONOFF, false)
+	Config.draws:addParam("smiteGolem", "Smite Golem", SCRIPT_PARAM_ONOFF, false)
+	Config.draws:addParam("smiteWolf", "Smite Giant Wolf", SCRIPT_PARAM_ONOFF, false)
 	
 	for i=1, heroManager.iCount do
 		local enemy = heroManager:GetHero(i)
@@ -99,6 +119,22 @@ function OnTick()
 	if not canAutoMove() then
 		return
 	end
+	
+	if smite == nil or myHero.dead or not aiConfig.asmite or myHero:CanUseSpell(smite) ~= READY then return end
+       
+        local smiteDmg = smiteDmgs[myHero.level]
+       
+        jungleMinions:update()
+        for i, minion in pairs(jungleMinions.objects) do
+                if minion ~= nil and minion.valid then
+                        if smiteDmg >= minion.health then
+                                if checkMinionSmite(minion.name) then
+                                        CastSpell(smite, minion)
+                                        break
+                                end
+                        end
+                end
+        end
 	
 	local SIGHTlot = GetInventorySlotItem(2049)
 	local SIGHTREADY = (SIGHTlot ~= nil and myHero:CanUseSpell(SIGHTlot) == READY)
@@ -167,6 +203,19 @@ function OnTick()
 	if Config.harass then
 		harass()
 	end
+end
+
+function checkMinionSmite(name)
+        if  (Strstarts(name, "AncientGolem") and aiConfig.smiteAncient) or
+                (Strstarts(name, "GreatWraith")  and aiConfig.smiteWight) or
+                (Strstarts(name, "Golem")        and aiConfig.smiteGolem) or
+                (Strstarts(name, "GiantWolf")    and aiConfig.smiteWolf)  or
+                (Strstarts(name, "LizardElder")  and aiConfig.smiteLizard)  or
+                Strstarts(name, "Dragon")        or
+                Strstarts(name, "Worm")
+        then return true
+        else return false
+        end
 end
 
 function moveToCursor()
