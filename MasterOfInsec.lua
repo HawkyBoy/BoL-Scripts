@@ -37,9 +37,6 @@ end
 HWID = Base64Encode(tostring(os.getenv("PROCESSOR_IDENTIFIER")..os.getenv("USERNAME")..os.getenv("COMPUTERNAME")..os.getenv("PROCESSOR_LEVEL")..os.getenv("PROCESSOR_REVISION")))
 id = 31
 
-
-
-require 'VPrediction'
 require 'SOW'
 
 local qRange, qDelay, qSpeed, qWidth = 1050, 0.25, 1800, 60
