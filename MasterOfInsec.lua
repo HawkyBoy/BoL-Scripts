@@ -1,6 +1,6 @@
 if myHero.charName ~= "LeeSin" then return end
 
-local version = "1.6"
+local version = "1.7"
 local AUTOUPDATE = true
 
 
@@ -74,15 +74,15 @@ function OnLoad()
 	Config.miscs:addParam("predInSec", "Use prediction for InSec", SCRIPT_PARAM_ONOFF, false)
 	Config.miscs:addParam("following", "Follow while combo", SCRIPT_PARAM_ONOFF, true)
 	Config:addSubMenu("[Ultimate Settings]", "useUlt")
-	Config:addSubMenu("[Auto Smite Settings]", "Auto Smite Settings")
+	Config:addSubMenu("[Auto Smite Settings]", "smites")
 	Config.draws:addParam("drawInsec", "Draw InSec Line", SCRIPT_PARAM_ONOFF, true)
 	Config.draws:addParam("drawQ", "Draw Q Range", SCRIPT_PARAM_ONOFF, false)
 	Config.draws:addParam("asmite", "Auto Smite Enabled", SCRIPT_PARAM_ONKEYTOGGLE, true, string.byte("J"))
-	Config.draws:addParam("smiteAncient", "Smite Ancient Golem", SCRIPT_PARAM_ONOFF, true)
-	Config.draws:addParam("smiteLizard", "Smite Lizard Elder", SCRIPT_PARAM_ONOFF, true)
-	Config.draws:addParam("smiteWight", "Smite Wight", SCRIPT_PARAM_ONOFF, false)
-	Config.draws:addParam("smiteGolem", "Smite Golem", SCRIPT_PARAM_ONOFF, false)
-	Config.draws:addParam("smiteWolf", "Smite Giant Wolf", SCRIPT_PARAM_ONOFF, false)
+	Config.smites:addParam("smiteAncient", "Smite Ancient Golem", SCRIPT_PARAM_ONOFF, true)
+	Config.smites:addParam("smiteLizard", "Smite Lizard Elder", SCRIPT_PARAM_ONOFF, true)
+	Config.smites:addParam("smiteWight", "Smite Wight", SCRIPT_PARAM_ONOFF, false)
+	Config.smites:addParam("smiteGolem", "Smite Golem", SCRIPT_PARAM_ONOFF, false)
+	Config.smites:addParam("smiteWolf", "Smite Giant Wolf", SCRIPT_PARAM_ONOFF, false)
 	
 	for i=1, heroManager.iCount do
 		local enemy = heroManager:GetHero(i)
