@@ -120,7 +120,7 @@ function OnTick()
 		return
 	end
 	
-	if smite == nil or myHero.dead or not aiConfig.asmite or myHero:CanUseSpell(smite) ~= READY then return end
+	if smite == nil or myHero.dead or not Config.asmite or myHero:CanUseSpell(smite) ~= READY then return end
        
         local smiteDmg = smiteDmgs[myHero.level]
        
@@ -206,11 +206,11 @@ function OnTick()
 end
 
 function checkMinionSmite(name)
-        if  (Strstarts(name, "AncientGolem") and aiConfig.smiteAncient) or
-                (Strstarts(name, "GreatWraith")  and aiConfig.smiteWight) or
-                (Strstarts(name, "Golem")        and aiConfig.smiteGolem) or
-                (Strstarts(name, "GiantWolf")    and aiConfig.smiteWolf)  or
-                (Strstarts(name, "LizardElder")  and aiConfig.smiteLizard)  or
+        if  (Strstarts(name, "AncientGolem") and Config.smiteAncient) or
+                (Strstarts(name, "GreatWraith")  and Config.smiteWight) or
+                (Strstarts(name, "Golem")        and Config.smiteGolem) or
+                (Strstarts(name, "GiantWolf")    and Config.smiteWolf)  or
+                (Strstarts(name, "LizardElder")  and Config.smiteLizard)  or
                 Strstarts(name, "Dragon")        or
                 Strstarts(name, "Worm")
         then return true
