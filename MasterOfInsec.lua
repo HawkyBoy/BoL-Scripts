@@ -1,6 +1,6 @@
 if myHero.charName ~= "LeeSin" then return end
 
-local version = "1.7"
+local version = "1.6"
 local AUTOUPDATE = true
 
 
@@ -77,7 +77,7 @@ function OnLoad()
 	Config:addSubMenu("[Auto Smite Settings]", "smites")
 	Config.draws:addParam("drawInsec", "Draw InSec Line", SCRIPT_PARAM_ONOFF, true)
 	Config.draws:addParam("drawQ", "Draw Q Range", SCRIPT_PARAM_ONOFF, false)
-	Config.draws:addParam("asmite", "Auto Smite Enabled", SCRIPT_PARAM_ONKEYTOGGLE, true, string.byte("J"))
+	Config.smites:addParam("asmite", "Auto Smite Enabled", SCRIPT_PARAM_ONKEYTOGGLE, true, string.byte("J"))
 	Config.smites:addParam("smiteAncient", "Smite Ancient Golem", SCRIPT_PARAM_ONOFF, true)
 	Config.smites:addParam("smiteLizard", "Smite Lizard Elder", SCRIPT_PARAM_ONOFF, true)
 	Config.smites:addParam("smiteWight", "Smite Wight", SCRIPT_PARAM_ONOFF, false)
