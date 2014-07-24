@@ -1,6 +1,6 @@
 if myHero.charName ~= "LeeSin" then return end
 
-local version = "1.7"
+local version = "1.8"
 local AUTOUPDATE = true
 
 
@@ -216,6 +216,10 @@ function checkMinionSmite(name)
         then return true
         else return false
         end
+end
+
+function Strstarts(String, Start)
+   return string.sub(String, 1, string.len(Start))==Start
 end
 
 function moveToCursor()
