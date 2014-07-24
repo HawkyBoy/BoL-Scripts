@@ -1,6 +1,43 @@
 if myHero.charName ~= "LeeSin" then return end
 
 local version = "1.0"
+local AUTOUPDATE = true
+
+
+local SCRIPT_NAME = "MasterOfInsec"
+local SOURCELIB_URL = "https://raw.github.com/TheRealSource/public/master/common/SourceLib.lua"
+local SOURCELIB_PATH = LIB_PATH.."SourceLib.lua"
+if FileExist(SOURCELIB_PATH) then
+	require("SourceLib")
+else
+	DOWNLOADING_SOURCELIB = true
+	DownloadFile(SOURCELIB_URL, SOURCELIB_PATH, function() print("Required libraries downloaded successfully, please reload") end)
+end
+
+if DOWNLOADING_SOURCELIB then print("Downloading required libraries, please wait...") return end
+
+if AUTOUPDATE then
+SourceUpdater(SCRIPT_NAME, version, "github.com", "/HawkyBoy/BoL-Scripts/blob/master/"..SCRIPT_NAME..".lua", SCRIPT_PATH .. GetCurrentEnv().FILE_NAME, "/HawkyBoy/BoL-Scripts/blob/master/"..SCRIPT_NAME..".version"):CheckUpdate()
+end
+
+local RequireI = Require("SourceLib")
+RequireI:Add("vPrediction", "https://raw.github.com/Hellsing/BoL/master/common/VPrediction.lua")
+RequireI:Add("SOW", "https://raw.github.com/Hellsing/BoL/master/common/SOW.lua")
+
+RequireI:Check()
+
+if RequireI.downloadNeeded == true then return end
+
+ScriptName = SCRIPT_NAME
+
+function analytics()
+	UpdateWeb(true, ScriptName, id, HWID)
+end
+
+HWID = Base64Encode(tostring(os.getenv("PROCESSOR_IDENTIFIER")..os.getenv("USERNAME")..os.getenv("COMPUTERNAME")..os.getenv("PROCESSOR_LEVEL")..os.getenv("PROCESSOR_REVISION")))
+id = 31
+
+
 
 require 'VPrediction'
 require 'SOW'
